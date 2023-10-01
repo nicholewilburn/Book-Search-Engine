@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; // Import Link
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
@@ -23,7 +23,8 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to='/'>
                 Search For Books
               </Nav.Link>
-              <Nav.Link as={Link} to='/apollo'> {/* Add a link to the ApolloPage */}
+              {/* Add a link to the ApolloPage */}
+              <Nav.Link as={Link} to='/apollo'>
                 Apollo Page
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
