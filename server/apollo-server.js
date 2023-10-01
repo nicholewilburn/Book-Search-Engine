@@ -5,6 +5,9 @@ const express = require('express');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cacheControl: {
+    defaultMaxAge: 60, // Set an appropriate cache age in seconds
+  },
 });
 
 server.listen().then(({ url }) => {

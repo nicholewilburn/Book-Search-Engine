@@ -53,13 +53,13 @@ const resolvers = {
         throw new Error('Error saving book');
       }
     },
-    deleteBook: async (_, args, context) => {
+    deleteBook: async (_, { bookId }, context) => {
       // Check if the user is authenticated (use context.user)
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to delete a book');
       }
       try {
-        const updatedUser = await deleteBook({ user: context.user, params: args });
+        const updatedUser = await deleteBook({ user: context.user, params: { bookId } });
         // Return the updated user here
         return updatedUser;
       } catch (error) {
