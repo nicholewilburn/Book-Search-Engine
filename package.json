@@ -18,5 +18,9 @@
   "dependencies": {
     "apollo-client": "^x.x.x", 
     "apollo-server-express": "^x.x.x"
+},
+"engines": {
+  "node": "14.x",
+  "npm": "6.x"
 }
 }
