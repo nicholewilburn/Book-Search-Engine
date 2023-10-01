@@ -1,34 +1,41 @@
 const express = require('express');
-const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
-const db = require('./config/connection');
-const routes = require('./routes');
-const { typeDefs, resolvers } = require('./graphql'); // Import your GraphQL schema and resolvers
+const http = require('http');
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+const typeDefs = `
+  type Query {
+    totalPosts: Int!
+  }
+`;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const resolvers = {
+  Query: {
+    totalPosts: () => 100,
+  },
+};
 
-// Initialize Apollo Server with typeDefs and resolvers
-const apolloServer = new ApolloServer({
-  typeDefs, // Import your GraphQL type definitions (schema)
-  resolvers, // Import your GraphQL resolvers
-});
+async function startServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
 
-// Apply Apollo Server as middleware to Express
-apolloServer.applyMiddleware({ app });
+  await server.start();
 
-// If we're in production, serve client/dist as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+  const app = express();
+
+  server.applyMiddleware({ app });
+
+  const httpServer = http.createServer(app);
+
+  app.get('/rest', (req, res) => {
+    res.json({ data: 'API working' });
+  });
+
+  httpServer.listen({ port: 3001 }, () => {
+    console.log(`Server is running on http://localhost:3001`);
+    console.log(`GraphQL path is ${server.graphqlPath}`);
+  });
 }
 
-app.use(routes);
-
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-});
-
-module.exports = { apolloServer }; // Export the Apollo Server instance
+startServer();
