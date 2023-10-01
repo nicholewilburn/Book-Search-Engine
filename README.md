@@ -59,7 +59,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 <a name="testIns"></a>
 ## Deployed Page
 
-coming soon
+https://obscure-caverns-04627-d0c745d8cfb6.herokuapp.com/
 
 <a name="license"></a>
 ## License
