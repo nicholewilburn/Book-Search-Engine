@@ -9,7 +9,6 @@ export const GET_BOOKS = gql`
       title
       author
       description
-      // Add other fields you want to retrieve from your GraphQL API
     }
   }
 `;
