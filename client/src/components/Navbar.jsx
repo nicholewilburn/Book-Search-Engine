@@ -24,7 +24,7 @@ const AppNavbar = () => {
                 Search For Books
               </Nav.Link>
               {/* Add a link to the ApolloPage */}
-              <Nav.Link as={Link} to='/apollo'>
+              <Nav.Link as={Link} to='/graphql'>
                 Apollo Page
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
