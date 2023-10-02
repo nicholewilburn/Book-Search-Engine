@@ -2,18 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const http = require('http');
 const path = require('path');
-
-const typeDefs = `
-  type Query {
-    totalPosts: Int!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    totalPosts: () => 100,
-  },
-};
+const { typeDefs, resolvers } = require('./graphql/index.js');
 
 async function startServer() {
   const server = new ApolloServer({
